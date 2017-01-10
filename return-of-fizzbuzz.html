@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2017 by anonymous (http://jsbin.com/pubihazoji/2/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+<style id="jsbin-css">
+* {
+  box-sizing: border-box;
+  font-family: sans-serif
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  min-width: 250px;
+  padding: 30px;
+}
+
+p {
+  max-width: 500px;
+}
+
+.fizz-buzz-item {
+  display: block;
+  float: left;
+  width: 80px;
+  height: 80px;
+  text-align: center;
+  border: 1px solid grey;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.fizz-buzz-item span {
+  vertical-align: middle;
+  line-height: 80px;
+}
+
+.fizz, .fizzbuzz {
+  border: 4px solid green;
+}
+
+.buzz, .fizzbuzz {
+  background-color: #D5F5E3;
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>Fizz Buzz</h1>
+  <section>
+    <p>In this game, you enter a positive number, and I count from 0 to that number, subbing in "fizz" if it's divisible by 3, "buzz" if it's divisible by 5, and "fizzbuzz" if it's divisible by both</p>
+    <form id="number-chooser" action="www.somewhere.com">
+      <label for="number-choice">Choose a positive number</label>
+      <input id="number-choice" name="number-choice" type="number" required />
+      <input type="submit" />
+    </form>
+  </section>
+  <section>
+    <h2>Results</h2>
+    <div class="js-results"></div>
+  </section>
+</main>
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+  
+<script id="jsbin-javascript">
+var fizzString = "fizz";
+var buzzString = "buzz";
+var fizzBuzzString = "fizzbuzz";
+
+function value(num) {
+  var val = num;
+  if (num % 15 === 0) {
+    val = fizzBuzzString;
+  } else if (num % 5 === 0) {
+    val = buzzString;
+  } else if (num % 3 === 0) {
+    val = fizzString;
+  }
+  return val;
+}
+
+function array(num) {
+  var result = [];
+  for (var i=1; i<=num; i++) {
+    result.push(value(i));
+  }
+  return result;
+}
+
+function doFizzBuzz(num) {
+  var fizzBuzzArray = array(num);
+  fizzBuzzArray.forEach(function(item) {
+      var newItem = $('<div class="fizz-buzz-item"><span>' + item + "</span></div>");
+      if (item === fizzString || item === buzzString || item === fizzBuzzString) {
+        newItem.addClass(item);
+      }
+      $(".js-results").append(newItem);
+  })
+}
+
+
+function handleFormSubmit() {
+  $("#number-chooser").submit(function(event) {
+    event.preventDefault();
+    $(".js-results").empty();
+    var choice = parseInt( $(event.currentTarget).find(
+      'input[name="number-choice"]').val());
+    doFizzBuzz(choice);
+  });
+}
+
+$(function() {
+  handleFormSubmit();
+});
+</script>
+</body>
+</html>
