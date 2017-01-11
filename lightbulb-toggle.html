@@ -3,7 +3,7 @@
 Created using JS Bin
 http://jsbin.com
 
-Copyright (c) 2017 by anonymous (http://jsbin.com/fuzusolepi/1/edit)
+Copyright (c) 2017 by anonymous (http://jsbin.com/cafivapexu/1/edit)
 
 Released under the MIT license: http://jsbin.mit-license.org
 -->
@@ -63,9 +63,20 @@ main {
   </div>
 </main>
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-  
+
 <script id="jsbin-javascript">
-// your code here
+
+function bulbClicks() {
+  var $lightbulb = $('.lightbulb')
+    $lightbulb.click(function(light){
+       $lightbulb.removeClass('bulb-on');
+      $(light.currentTarget).addClass('bulb-on')
+    });
+}
+
+
+bulbClicks();
+
 </script>
 </body>
 </html>
